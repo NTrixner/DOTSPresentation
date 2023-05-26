@@ -1,4 +1,3 @@
-using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -6,13 +5,10 @@ using Unity.Transforms;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[BurstCompile]
 public partial struct RandomPositionSystem : ISystem
 {
-    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        
         Camera camera = Camera.main;
         var ecb = new EntityCommandBuffer(Allocator.Temp);
 
@@ -27,9 +23,13 @@ public partial struct RandomPositionSystem : ISystem
                 Position = camera.ViewportToWorldPoint(position),
                 Scale = 1
             });
+            ecb.AddComponent(entity, new MoverComponent()
+            {
+                speed = Random.Range(-1f, 1f)
+            });
             ecb.RemoveComponent(entity, typeof(RandomPositionComponent));
         }
-        
+
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }

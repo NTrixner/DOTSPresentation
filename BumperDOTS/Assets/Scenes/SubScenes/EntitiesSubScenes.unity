@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3132676982476468861, guid: ca7771710952cf74b987cd82b4b7ca7e, type: 3}
-  amount: 50000
+  amount: 10
 --- !u!4 &573361494
 Transform:
   m_ObjectHideFlags: 0
